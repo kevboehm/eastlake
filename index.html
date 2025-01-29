@@ -5,13 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Countdown to Tanya's Return</title>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Pacifico&family=Orbitron:wght@400;700&display=swap');
 
-        /* Background: animated stars */
+        /* 90s R&B color scheme */
         body {
-            font-family: 'Orbitron', sans-serif;
-            background: black;
-            color: cyan;
+            font-family: 'Pacifico', cursive;
+            background: linear-gradient(135deg, #4b0082, #ffcc00);
+            color: white;
             text-align: center;
             overflow: hidden;
             margin: 0;
@@ -23,25 +23,11 @@
             position: relative;
         }
 
-        /* Starry animated background */
-        body::before {
-            content: "";
-            position: absolute;
-            width: 300%;
-            height: 300%;
-            background: url('https://www.transparenttextures.com/patterns/stardust.png');
-            animation: starAnimation 50s linear infinite;
-        }
-
-        @keyframes starAnimation {
-            from { transform: translateY(0); }
-            to { transform: translateY(-100%); }
-        }
-
+        /* Neon glow effect */
         h1 {
-            font-size: 2rem;
+            font-size: 2.5rem;
             text-transform: uppercase;
-            text-shadow: 0 0 10px cyan;
+            text-shadow: 0 0 10px #ffcc00, 0 0 20px #ff9900;
             z-index: 1;
         }
 
@@ -49,32 +35,44 @@
         #countdown {
             font-size: 3rem;
             font-weight: bold;
-            text-shadow: 0 0 15px cyan, 0 0 30px blue;
+            text-shadow: 0 0 15px white, 0 0 30px gold;
             z-index: 1;
         }
 
-        /* Glowing border effect */
+        /* Retro 90s cassette-style container */
         .container {
-            border: 2px solid cyan;
+            background: rgba(0, 0, 0, 0.7);
             padding: 20px;
             border-radius: 10px;
-            box-shadow: 0 0 20px cyan;
+            border: 2px solid gold;
+            box-shadow: 0 0 20px gold;
             z-index: 1;
+            font-family: 'Orbitron', sans-serif;
         }
 
-        /* Hidden Play Button (only appears if autoplay fails) */
+        /* Hidden Play Button (if autoplay fails) */
         #playButton {
             display: none;
             margin-top: 20px;
-            padding: 10px 20px;
-            font-size: 1rem;
+            padding: 12px 24px;
+            font-size: 1.2rem;
             font-weight: bold;
-            background: cyan;
+            background: gold;
             border: none;
-            border-radius: 5px;
+            border-radius: 10px;
             cursor: pointer;
             text-transform: uppercase;
-            box-shadow: 0 0 10px cyan;
+            color: black;
+            box-shadow: 0 0 10px gold;
+        }
+
+        /* Retro cassette-style music player */
+        .music-player {
+            margin-top: 30px;
+            width: 200px;
+            height: 100px;
+            background: url('https://upload.wikimedia.org/wikipedia/commons/6/6a/Cassette_Tape.png') no-repeat center;
+            background-size: cover;
         }
     </style>
 </head>
@@ -83,6 +81,9 @@
     <div class="container">
         <div id="countdown">Loading...</div>
     </div>
+
+    <!-- Retro Cassette Player Image -->
+    <div class="music-player"></div>
 
     <!-- Audio Element (Autoplays if possible) -->
     <audio id="bgMusic" loop>
@@ -96,7 +97,7 @@
     <script>
         function updateCountdown() {
             // Set the target date (March 2, 2PM PST)
-            const targetDate = new Date('March 2, 2025 12:00:00 PST').getTime();
+            const targetDate = new Date('March 2, 2025 14:00:00 PST').getTime();
             const now = new Date().getTime();
             const difference = targetDate - now;
 
@@ -113,7 +114,7 @@
             // Stop countdown when the target time is reached
             if (difference <= 0) {
                 clearInterval(countdownInterval);
-                document.getElementById("countdown").innerHTML = "Time's up!";
+                document.getElementById("countdown").innerHTML = "Welcome Back, Tanya!";
             }
         }
 
