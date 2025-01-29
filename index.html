@@ -5,26 +5,69 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Countdown to March 2, 2PM PST</title>
     <style>
+        @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap');
+
+        /* Background: animated stars */
         body {
-            font-family: Arial, sans-serif;
+            font-family: 'Orbitron', sans-serif;
+            background: black;
+            color: cyan;
+            text-align: center;
+            overflow: hidden;
+            margin: 0;
             display: flex;
             justify-content: center;
             align-items: center;
             height: 100vh;
-            background-color: #121212;
-            color: white;
-            text-align: center;
             flex-direction: column;
+            position: relative;
         }
+
+        /* Starry animated background */
+        body::before {
+            content: "";
+            position: absolute;
+            width: 300%;
+            height: 300%;
+            background: url('https://www.transparenttextures.com/patterns/stardust.png');
+            animation: starAnimation 50s linear infinite;
+        }
+
+        @keyframes starAnimation {
+            from { transform: translateY(0); }
+            to { transform: translateY(-100%); }
+        }
+
+        h1 {
+            font-size: 2rem;
+            text-transform: uppercase;
+            text-shadow: 0 0 10px cyan;
+            z-index: 1;
+        }
+
+        /* Countdown text */
         #countdown {
             font-size: 3rem;
             font-weight: bold;
+            text-shadow: 0 0 15px cyan, 0 0 30px blue;
+            z-index: 1;
+        }
+
+        /* Glowing border effect */
+        .container {
+            border: 2px solid cyan;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 20px cyan;
+            z-index: 1;
         }
     </style>
 </head>
 <body>
-    <h1>Countdown to March 2, 2PM PST</h1>
-    <div id="countdown">Loading...</div>
+    <h1>Countdown to Tanya's Return</h1>
+    <div class="container">
+        <div id="countdown">Loading...</div>
+    </div>
 
     <script>
         function updateCountdown() {
