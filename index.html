@@ -61,18 +61,42 @@
             box-shadow: 0 0 20px cyan;
             z-index: 1;
         }
+
+        /* Hidden Play Button (only appears if autoplay fails) */
+        #playButton {
+            display: none;
+            margin-top: 20px;
+            padding: 10px 20px;
+            font-size: 1rem;
+            font-weight: bold;
+            background: cyan;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            text-transform: uppercase;
+            box-shadow: 0 0 10px cyan;
+        }
     </style>
 </head>
 <body>
-    <h1>Countdown to Tanya's Return</h1>
+    <h1>Tanya Returns in:</h1>
     <div class="container">
         <div id="countdown">Loading...</div>
     </div>
 
+    <!-- Audio Element (Autoplays if possible) -->
+    <audio id="bgMusic" loop>
+        <source src="https://www.bensound.com/bensound-music/bensound-love.mp3" type="audio/mpeg">
+        Your browser does not support the audio tag.
+    </audio>
+
+    <!-- Play Music Button (Appears if autoplay fails) -->
+    <button id="playButton">Play Music</button>
+
     <script>
         function updateCountdown() {
             // Set the target date (March 2, 2PM PST)
-            const targetDate = new Date('March 2, 2025 14:00:00 PST').getTime();
+            const targetDate = new Date('March 2, 2025 12:00:00 PST').getTime();
             const now = new Date().getTime();
             const difference = targetDate - now;
 
@@ -96,6 +120,23 @@
         // Update countdown every second
         const countdownInterval = setInterval(updateCountdown, 1000);
         updateCountdown(); // Run once immediately
+
+        // Try to autoplay music when page loads
+        const music = document.getElementById("bgMusic");
+        const playButton = document.getElementById("playButton");
+
+        document.addEventListener("DOMContentLoaded", function () {
+            music.play().catch(() => {
+                // If autoplay fails, show the play button
+                playButton.style.display = "block";
+            });
+        });
+
+        // Play music when the button is clicked
+        playButton.addEventListener("click", function () {
+            music.play();
+            this.style.display = "none"; // Hide button after playing
+        });
     </script>
 </body>
 </html>
