@@ -114,7 +114,7 @@
             100% { transform: scale(1); }
         }
 
-        /* Floating hearts */
+        /* Update heart styles */
         .heart {
             position: absolute;
             color: pink;
@@ -122,6 +122,17 @@
             pointer-events: none;
             animation: float 3s ease-in-out infinite;
             text-shadow: 0 0 5px red;
+            z-index: 0; /* Put hearts behind content by default */
+        }
+
+        .heart.front {
+            z-index: 2; /* Put some hearts in front of content */
+        }
+
+        /* Ensure main content stays in middle layer */
+        h1, .container {
+            z-index: 1;
+            position: relative;
         }
 
         @keyframes gradient {
@@ -193,12 +204,26 @@
             this.style.display = "none"; // Hide button after playing
         });
 
-        // Add function to create floating hearts
+        // Update createHeart function
         function createHeart() {
             const heart = document.createElement('div');
             heart.className = 'heart';
             heart.innerHTML = '❤';
+            
+            // Randomize starting position
             heart.style.left = Math.random() * 100 + 'vw';
+            
+            // Randomly decide if heart should be in front or behind
+            if (Math.random() > 0.5) {
+                heart.classList.add('front');
+            }
+            
+            // Position hearts above or below the content
+            const verticalPosition = Math.random() > 0.5 ? 
+                Math.random() * 30 + 'vh' :  // Top 30% of screen
+                (Math.random() * 30 + 70) + 'vh';  // Bottom 30% of screen
+            heart.style.top = verticalPosition;
+            
             heart.style.animationDuration = Math.random() * 3 + 2 + 's';
             document.body.appendChild(heart);
 
@@ -208,8 +233,8 @@
             }, 5000);
         }
 
-        // Create hearts periodically
-        setInterval(createHeart, 300);
+        // Create hearts more frequently
+        setInterval(createHeart, 200);  // Increased frequency from 300ms to 200ms
     </script>
 </body>
 </html>
