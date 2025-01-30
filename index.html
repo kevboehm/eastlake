@@ -139,6 +139,41 @@
             0% { background-position: 0% 50%; }
             100% { background-position: 400% 50%; }
         }
+
+        /* Shooting star styles */
+        .shooting-star {
+            position: absolute;
+            width: 100px;
+            height: 2px;
+            background: linear-gradient(90deg, white, transparent);
+            animation: shooting 2s linear infinite;
+            transform: rotate(-45deg);
+            z-index: 0;
+            opacity: 0;
+        }
+
+        .shooting-star::before {
+            content: '';
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            background: white;
+            border-radius: 50%;
+            left: 0;
+            top: -4px;
+            box-shadow: 0 0 20px white;
+        }
+
+        @keyframes shooting {
+            0% {
+                transform: translateX(-100px) translateY(0) rotate(-45deg);
+                opacity: 1;
+            }
+            100% {
+                transform: translateX(calc(100vw + 100px)) translateY(-100vh) rotate(-45deg);
+                opacity: 0;
+            }
+        }
     </style>
 </head>
 <body>
@@ -235,6 +270,30 @@
 
         // Create hearts more frequently
         setInterval(createHeart, 200);  // Increased frequency from 300ms to 200ms
+
+        // Add function to create shooting stars
+        function createShootingStar() {
+            const star = document.createElement('div');
+            star.className = 'shooting-star';
+            
+            // Randomize starting position
+            const startingY = Math.random() * 100 + 'vh';
+            star.style.top = startingY;
+            
+            // Randomize animation duration
+            const duration = (Math.random() * 1 + 1) + 's';
+            star.style.animationDuration = duration;
+            
+            document.body.appendChild(star);
+
+            // Remove star after animation
+            setTimeout(() => {
+                star.remove();
+            }, parseFloat(duration) * 1000);
+        }
+
+        // Create shooting stars periodically
+        setInterval(createShootingStar, 3000);  // New star every 3 seconds
     </script>
 </body>
 </html>
