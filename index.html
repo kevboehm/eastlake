@@ -134,7 +134,7 @@
             box-shadow: 0 0 10px rgba(0, 195, 255, 0.5);
         }
 
-        /* Update Seattle skyline styles for image */
+        /* Simplify Seattle skyline styles */
         .seattle-skyline {
             position: absolute;
             top: 20px;
@@ -142,7 +142,6 @@
             transform: translateX(-50%);
             width: 400px;
             height: 200px;
-            opacity: 0.8;
             z-index: 1;
             border-radius: 10px;
             overflow: hidden;
@@ -152,25 +151,11 @@
             width: 100%;
             height: 100%;
             object-fit: cover;
-            filter: brightness(0) saturate(100%) invert(67%) sepia(72%) 
-                    saturate(757%) hue-rotate(155deg) brightness(101%) contrast(101%);
         }
 
-        /* Update glow animation for image */
+        /* Remove the glow animation */
         @keyframes glow {
-            0% { filter: brightness(0) saturate(100%) invert(67%) sepia(72%) 
-                 saturate(757%) hue-rotate(155deg) brightness(101%) contrast(101%)
-                 drop-shadow(0 0 10px rgba(0, 195, 255, 0.3)); }
-            50% { filter: brightness(0) saturate(100%) invert(67%) sepia(72%) 
-                  saturate(757%) hue-rotate(155deg) brightness(101%) contrast(101%)
-                  drop-shadow(0 0 15px rgba(0, 195, 255, 0.7)); }
-            100% { filter: brightness(0) saturate(100%) invert(67%) sepia(72%) 
-                   saturate(757%) hue-rotate(155deg) brightness(101%) contrast(101%)
-                   drop-shadow(0 0 10px rgba(0, 195, 255, 0.3)); }
-        }
-
-        .seattle-skyline img {
-            animation: glow 4s ease-in-out infinite;
+            0%, 50%, 100% { filter: none; }
         }
     </style>
 </head>
